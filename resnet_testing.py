@@ -11,10 +11,10 @@ if not os.path.exists('../dataset/cifar_train/'):
 if not os.path.exists('../dataset/cifar_test/'):
     data = resnet.test_tensor('../dataset/cifar-10-batches-py/test_batch')
 
-mean = pickle.load(open('../dataset/cifar_train/train_mean.pkl','rb'))
-std = pickle.load(open('../dataset/cifar_train/train_std.pkl','rb'))
+mean = tuple(pickle.load(open('../dataset/cifar_train/train_mean.pkl','rb')).numpy().tolist())
+std = tuple(pickle.load(open('../dataset/cifar_train/train_std.pkl','rb')).numpy().tolist())
 
-print(tuple(mean.numpy().tolist()),tuple(std.numpy().tolist()))
+train_dataset = resnet.Customdataset('../
 
 mean = pickle.load(open('../dataset/cifar_test/test_mean.pkl','rb'))
 std = pickle.load(open('../dataset/cifar_test/test_std.pkl','rb'))
