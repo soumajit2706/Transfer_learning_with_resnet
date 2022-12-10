@@ -83,12 +83,8 @@ class test_tensor(train_tensor):
             self.testdata[i] = self.labels[i]
 
 
-
-
-
-
 class Cumtomdataset(Dataset):
-    def __init__(self,filename):
+    def __init__(self,filename,mean):
         super().__init__()
         self.dataset = pickle.load(open(filename,'rb'))
 
@@ -96,10 +92,13 @@ class Cumtomdataset(Dataset):
         return len(self.dataset)
 
     def __getitem__(self,idx):
-        x = torch.load(str(idx) + '.pt')
+        x = T.Normalize(mean,std)(torch.load(str(idx) + '.pt'))
         y = self.dataset[idx]
         return x,y
 
+class customdataloader(DataLoader):
+    def __init__(self,dataset,batch_size=256,shuffle=True):
+        super().__init__(dataset,batch_size=256,shuffle=True)
 
 
 
